@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Quiz App</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #e8f0fe;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .quiz-container {
+            background: white;
+            padding: 25px;
+            width: 90%;
+            max-width: 450px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a237e;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question p {
+            font-weight: bold;
+        }
+
+        label {
+            display: block;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        button {
+            background: #3949ab;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #1a237e;
+        }
+
+        #result {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+    <h1>My Quiz App</h1>
+
+    <form id="quizForm">
+
+        <div class="question">
+            <p>1. Which language is used to create webpages?</p>
+            <label><input type="radio" name="q1" value="a"> Python</label>
+            <label><input type="radio" name="q1" value="b"> HTML</label>
+            <label><input type="radio" name="q1" value="c"> Java</label>
+        </div>
+
+        <div class="question">
+            <p>2. Which language is used to style a webpage?</p>
+            <label><input type="radio" name="q2" value="a"> HTML</label>
+            <label><input type="radio" name="q2" value="b"> CSS</label>
+            <label><input type="radio" name="q2" value="c"> Python</label>
+        </div>
+
+        <div class="question">
+            <p>3. Which language makes webpages interactive?</p>
+            <label><input type="radio" name="q3" value="a"> JavaScript</label>
+            <label><input type="radio" name="q3" value="b"> CSS</label>
+            <label><input type="radio" name="q3" value="c"> HTML</label>
+        </div>
+
+        <div class="question">
+            <p>4. What does CSS stand for?</p>
+            <label><input type="radio" name="q4" value="a"> Computer Style Sheet</label>
+            <label><input type="radio" name="q4" value="b"> Creative Style System</label>
+            <label><input type="radio" name="q4" value="c"> Cascading Style Sheets</label>
+        </div>
+
+        <div class="question">
+            <p>5. Which tag is used for a heading in HTML?</p>
+            <label><input type="radio" name="q5" value="a"> &lt;p&gt;</label>
+            <label><input type="radio" name="q5" value="b"> &lt;h1&gt;</label>
+            <label><input type="radio" name="q5" value="c"> &lt;br&gt;</label>
+        </div>
+
+        <button type="button" onclick="submitQuiz()">Submit</button>
+
+        <button type="reset" onclick="resetQuiz()">Restart Quiz</button>
+
+    </form>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+
+function submitQuiz() {
+
+    let answers = {
+        q1: "b",
+        q2: "b",
+        q3: "a",
+        q4: "c",
+        q5: "b"
+    };
+
+    let score = 0;
+    let total = 5;
+
+    for (let question in answers) {
+
+        let selected = document.querySelector(
+            'input[name="' + question + '"]:checked'
+        );
+
+        if (!selected) {
+            document.getElementById("result").innerHTML =
+                "Please answer all questions!";
+            return;
+        }
+
+        if (selected.value === answers[question]) {
+            score++;
+        }
+    }
+
+    document.getElementById("result").innerHTML =
+        "Your Score: " + score + "/" + total +
+        "<br>" + (score >= 3 ?
+        "Excellent! Well Done!" :
+        "Good Try! Keep Practicing!");
+}
+
+function resetQuiz() {
+    document.getElementById("result").innerHTML = "";
+}
+
+</script>
+
+</body>
+</html>
